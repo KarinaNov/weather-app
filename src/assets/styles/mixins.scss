@@ -1,0 +1,21 @@
+@mixin row{
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+@mixin container{
+    width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@mixin flex{
+    display: -ms-flexbox !important;
+    display: -webkit-box !important;
+    display: flex !important;
+}
