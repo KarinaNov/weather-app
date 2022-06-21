@@ -1,7 +1,7 @@
 <template>
 <div>
-    <SearchBar @dataFetched="getWeatherData" />
-    <CurrentDay :weather="weather" :exist="exist" />
+    <SearchBar @dataFetched2="getWeatherData" />
+    <CurrentDay :weather2="weather2" :exist="exist" />
 </div>
 </template>
 
@@ -13,13 +13,13 @@ export default {
   name: 'App',
   data: function() {
     return {
-      weather: {},
+      weather2: {},
       exist: false
     }
   },
   methods: {
     getWeatherData(data) {
-      this.weather = data;
+      this.weather2 = data;
       this.exist = true;
     }
   },

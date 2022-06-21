@@ -1,64 +1,61 @@
 <template>
-<div>
-    <SearchBar @dataFetched="getWeatherData" />
-     <div class="current-day d-flex align-items-center night" v-bind:class = "(timeOfDay === 'day') ? 'day' : 'night'">
+  <div>
+    <SearchBar @dataFetched2="getWeatherData" />
+    <div
+      class="current-day d-flex align-items-center night"
+      v-bind:class="timeOfDay === 'day' ? 'day' : 'night'"
+    >
       <div class="weather-container container">
-      <h3>Search weather week by city name.</h3>
-      <h2><i class="fas fa-search"></i></h2>
+        <h3>Search weather week by city name.</h3>
+        <h2><i class="fas fa-search"></i></h2>
+      </div>
+      <MyFooter :days="nextDays" :exist="exist" />
     </div>
-    <MyFooter :days="nextDays" :exist="exist" />
-     </div>
-     </div>
+  </div>
 </template>
 
 <script>
-import SearchBar from '@/components/SearchBar';
-import MyFooter from '@/components/MyFooter';
+import SearchBar from "@/components/SearchBar";
+import MyFooter from "@/components/MyFooter";
 
 export default {
-  name: 'App',
-  data: function() {
+  name: "App",
+  data: function () {
     return {
-      weather: {},
+      weather2: {},
       exist: false,
       daysOfWeek: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
       nextDays: [],
-      timeOfDay: 'day'
-    }
+      timeOfDay: "day",
+    };
   },
   methods: {
     getWeatherData(data) {
-
-      this.weather = data;
+      this.weather2 = data;
       this.exist = true;
 
       let days = [];
       let number = new Date().getDay();
 
-      for(let i=1; i<=6; i++) {
+      for (let i = 1; i <= 7; i++) {
         number++;
-        if(number >= 7) {
+        if (number >= 7) {
           number = 0;
         }
         days.push({
           name: this.daysOfWeek[number],
-          data: this.weather.list[Math.round(i*5.8)]
-        })
+          data: this.weather2.daily[Math.round(i)],
+        });
       }
-      // const arr2 = data.list.filter(d => d.dt_txt);
-      // console.log(arr2.indexOf(item => item.dt_txt === '2022-06-20 15:00:00'))
-        // console.log(arr2.find(d => d.dt_txt == '2022-06-20 15:00:00'))
-      // let item = this.weather.list.forEach(element => console.log(element.dt_txt));
-      // console.log(item)
+      console.log(this.weather2);
       this.nextDays = days;
-      console.log(days)
-    }
+    },
   },
   components: {
     SearchBar,
-    MyFooter
-  }
-}
+    MyFooter,
+  },
+};
 </script>
 
 <style>

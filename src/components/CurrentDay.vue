@@ -7,20 +7,20 @@
       <div class="weather-data container">
         <div class="row">
           <div class="data-box temperature">
-            {{Math.round(weather.list[0].main.temp)}}&ordm;C
+            {{weather2.current.temp}}&ordm;C
           </div>
           <div class="data-box d-flex">
-            <div class="wind text-justify">{{weather.list[0].wind.speed}}km/h</div>
-            <div class="humidity text-justify">{{weather.list[0].main.humidity}}%</div>
+            <div class="wind text-justify">{{weather2.current.wind_speed}}km/h</div>
+            <div class="humidity text-justify">{{weather2.current.humidity}}%</div>
           </div>
           <div class="data-box description d-flex align-items-end">
-            <span>{{weather.list[0].weather[0].main}}</span>
-          </div>
+            <span>{{weather2.current.weather[0].description}}</span>
+          </div> 
         </div>
       </div>
       <div class="location-data container">
         <div class="location-box">
-          <i class="fas fa-map-marker-alt"></i> {{weather.city.name}}
+          <i class="fas fa-map-marker-alt"></i> {{weather2.timezone}}
         </div>
         <div class="location-box d-flex">
           <div class="date">
@@ -45,7 +45,7 @@
 export default {
   
   name: 'CurrentDay',
-  props: ['weather', 'exist'],
+  props: ['weather2', 'exist'],
   data: function() {
     return {
       timeOfDay: 'day'
@@ -55,8 +55,7 @@ export default {
   methods: {
     dayOrNight() {
       const time = new Date().getHours();
-      // const time = 23;
-
+console.log(this.weather)
       if(time >= 18 || time < 5) {
 
         this.timeOfDay = 'night'

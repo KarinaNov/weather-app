@@ -1,5 +1,5 @@
 <template>
-  <div class="next-day col-3" >
+  <div class="next-day col-3">
     <img
       :src="`http://openweathermap.org/img/wn/${day.data.weather[0].icon}.png`"
       alt="img"
@@ -7,12 +7,12 @@
     <div class="div">
       {{ day.name }}
     </div>
-    
+
     <div class="info">
-      <p>{{day.data.main.temp_max}}&ordm;C</p>
-      <p>{{day.data.wind.speed}} km/h</p>
-      <p>{{day.data.weather[0].description}}</p>
-      <p>{{day.data.main.pressure}} hPa</p>
+      <p>{{ day.data.temp.day }}&ordm;C</p>
+      <p>{{ day.data.wind_speed }} km/h</p>
+      <p>{{ day.data.weather[0].description }}</p>
+      <p>{{ day.data.pressure }} hPa</p>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@
 <script>
 export default {
   name: "NextDay",
-  props: ["day"]
+  props: ["day"],
 };
 </script>
 

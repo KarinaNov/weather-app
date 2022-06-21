@@ -35,20 +35,23 @@ export default {
       city: "",
       errorCity: false,
       weather: {},
+      weather2: {},
+      lat: "",
+      lon: "",
     };
   },
   methods: {
     getData() {
       this.axios
         .get(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&exclude=daily&APPID=38edd8cbc178071c11ab3d91cb7decc1&units=metric`
+          `https://api.openweathermap.org/data/2.5/forecast?q=${this.city}&APPID=38edd8cbc178071c11ab3d91cb7decc1&units=metric`
         )
         .then((response) => {
           return response.data;
+          
         })
         .then((data) => {
           this.weather = data;
-          console.log(this.weather);
           this.$emit("dataFetched", this.weather);
         })
         .catch((error) => {
@@ -56,10 +59,36 @@ export default {
         });
       if (this.city == "") {
         this.errorCity = true;
-      } else {this.errorCity = false;}
-
+      } else {
+        this.errorCity = false;
+      }
       this.city = "";
+     setTimeout(() => this.getDataCoord(), 1000)
+      
     },
+
+    getDataCoord() {
+          this.lat = this.weather.city.coord.lat;
+          this.lon = this.weather.city.coord.lon;
+      this.axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${this.lat}&lon=${this.lon}&appid=38edd8cbc178071c11ab3d91cb7decc1&units=metric`
+        )
+        .then((res) => {
+          return res.data;
+        })
+        .then((data) => {
+          this.weather2 = data;
+          this.$emit("dataFetched2", this.weather2);
+        })
+        .catch((error) => {
+          return error;
+        });
+    },
+    getCity(){
+        this.getData();
+        this.getDataCoord()
+    }
   },
   components: {
     MyNavbar,
@@ -120,25 +149,25 @@ input.form-control[type="text"]:focus:not([readonly]) {
 .error_city::before {
   content: "Insert city";
   position: absolute;
-  color: rgb(203, 15, 15);;
+  color: rgb(203, 15, 15);
   width: 160px;
   height: 50px;
   bottom: -60px;
   left: 0;
   font-size: 20px;
-    background-color: #555;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px 0;
+  background-color: #555;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
 }
 .error_city::after {
-    content: "";
-    position: absolute;
-    bottom: -20px;
-    left: 42%;
-    border-width: 15px;
-     transform: rotate(-180deg);
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 42%;
+  border-width: 15px;
+  transform: rotate(-180deg);
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
 }
 </style>
