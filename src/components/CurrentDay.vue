@@ -55,7 +55,6 @@ export default {
   methods: {
     dayOrNight() {
       const time = new Date().getHours();
-console.log(this.weather)
       if(time >= 18 || time < 5) {
 
         this.timeOfDay = 'night'
