@@ -9,13 +9,11 @@
           <div class="data-box temperature">
             {{weather2.current.temp}}&ordm;C
           </div>
-          <div class="data-box d-flex">
+             <div class="data-box d-flex">
             <div class="wind text-justify">{{weather2.current.wind_speed}}km/h</div>
             <div class="humidity text-justify">{{weather2.current.humidity}}%</div>
-          </div>
-          <div class="data-box description d-flex align-items-end">
             <span>{{weather2.current.weather[0].description}}</span>
-          </div> 
+          </div>
         </div>
       </div>
       <div class="location-data container">
